@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing/bloc/comment_bloc.dart';
-import 'package:testing/bloc/comment_event.dart';
-import 'package:testing/bloc/comment_state.dart';
+import 'package:testing/bloc/comment/comment_bloc.dart';
+import 'package:testing/bloc/comment/comment_event.dart';
+import 'package:testing/bloc/comment/comment_state.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _InfiniteList();
 }
@@ -46,7 +48,7 @@ class _InfiniteList extends State<HomeScreen> {
             return Center(child: CircularProgressIndicator());
           }
           if (state is CommentStateFailure) {
-            return Center(
+            return const Center(
               child: Text(
                 'Cannot load comments from Server',
                 style: TextStyle(fontSize: 22, color: Colors.red),
@@ -62,7 +64,7 @@ class _InfiniteList extends State<HomeScreen> {
                   if (index >= state.comments.length) {
                     return Container(
                       alignment: Alignment.center,
-                      child: Center(
+                      child: const Center(
                         child: SizedBox(
                           width: 50,
                           height: 50,
@@ -76,11 +78,11 @@ class _InfiniteList extends State<HomeScreen> {
                     return ListTile(
                       leading: Text('${state.comments[index].id}'),
                       title: Text('${state.comments[index].email}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold)),
                       isThreeLine: true,
                       subtitle: Text('${state.comments[index].body}',
-                          style: TextStyle(fontSize: 18)),
+                          style: const TextStyle(fontSize: 18)),
                     );
                   }
                 },
@@ -89,7 +91,7 @@ class _InfiniteList extends State<HomeScreen> {
                     : state.comments.length + 1, //add more item
                 controller: _scrollController);
           }
-          return Center(
+          return const Center(
               child: Text(
                   'Other states..')); //never run this line, only fix warning.
         },
